@@ -4,14 +4,14 @@
       include "grafico.php"; 
 
 
-         /* 
+         
 
 
 
 
 session_start();
 
-if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
+if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'ADM' ) )
 {
   header("Location: index.html");
   exit;
@@ -20,7 +20,7 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 }
 
 
-*/
+
  
       ?>
 
@@ -78,27 +78,36 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 
       function drawStuff() {
         var data = new google.visualization.arrayToDataTable([
-          ['Move', 'quantidade'],
-          ["Frame", <?php echo $FRAME ?>],
-          ["Fitas", <?php echo $FITAS ?>],
-          ["Servidores", <?php echo $SERVIDORES ?>],
-          ["Switch", <?php echo $SWITCH ?>],
-          ["Cabos", <?php echo $CABOS ?>],
-          ['Outros', <?php echo $OUTROS ?>]
+          ['Move', 'Atividades'],
+          ["LDANT1", <?php echo $LDA_NT_1 ?>],
+          ["MQSNT1", <?php echo $MQS_NT_1 ?>],
+          ["WBZNT1", <?php echo $WBZ_NT_1 ?>],
+          ["LDA1", <?php echo $LDA_1 ?>],
+          ["APU1", <?php echo $APU_1 ?>],
+          ['JZO1', <?php echo $JZO_1 ?>],
+          ['LDA2', <?php echo $LDA_2 ?>],
+          ['WBZ1', <?php echo $WBZ_1 ?>],
+          ['WBA1', <?php echo $WBA_1 ?>],
+          ['IVPML', <?php echo $IVP_ML ?>],
+          ['LDACL', <?php echo $LDA_CL ?>],
+          ['WBZML', <?php echo $WBZ_ML ?>],
+          ['LDAD', <?php echo $LDA_D ?>],
+          ['PGOD', <?php echo $PGO_D ?>]
+          
         ]);
 
         var options = {
-          width: 800,
+          width: 900,
           legend: { position: 'none' },
           chart: {
-            title: 'Contagem de movimentação de equipamentos <?php echo date('Y') ?>',
+            title: 'Melhores equipes do Ano <?php echo date('Y') ?>',
             subtitle: '' },
           axes: {
             x: {
-              0: { side: 'top', label: 'Equipamentos'} // Top x-axis.
+              0: { side: 'top', label: 'Equipes'} // Top x-axis.
             }
           },
-          bar: { groupWidth: "90%" }
+          bar: { groupWidth: "80%" }
         };
 
         var chart = new google.charts.Bar(document.getElementById('top_x_div'));
@@ -107,7 +116,8 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
       };
     </script>
 
-    <script type="text/javascript" src="loader.js"></script>
+
+<script type="text/javascript" src="loader.js"></script>
     <script type="text/javascript">
 google.charts.load('current', {'packages':['bar']});
   
@@ -116,29 +126,21 @@ google.charts.load('current', {'packages':['bar']});
       function drawStuff2() {
         var data = new google.visualization.arrayToDataTable([
           ['Move', 'Quantidade'],
-          ["JAN", <?php echo $JAN ?>],
-          ["FEV", <?php echo $FEV ?>],
-          ["MAR", <?php echo $MAR ?>],
-          ["ABR", <?php echo $ABR ?>],
-          ['MAI', <?php echo $MAI ?>],
-          ['JUN', <?php echo $JUN ?>],
-          ['JUL', <?php echo $JUL ?>],
-          ['AGO', <?php echo $AGO ?>],
-          ['SET', <?php echo $SETE ?>],
-          ['OUT', <?php echo $OUTU ?>],
-          ['NOV', <?php echo $NOV ?>],
-          ['DEZ', <?php echo $DEZ ?>]
+          ["Postes aprumados", <?php echo $postes_apru ?>],
+          ["Postes Substituidos", <?php echo $poste_subs ?>],
+          ["Postes implantados", <?php echo $postes_implant ?>]
+         
         ]);
 
         var options = {
           width: 800,
           legend: { position: 'none' },
           chart: {
-            title: 'Cabos',
+            title: 'Postes',
             subtitle: '' },
           axes: {
             x: {
-              0: { side: 'top', label: 'Cabeamento passado <?php echo date('Y') ?>'} // Top x-axis.
+              0: { side: 'top', label: 'Atividades postes ano <?php echo date('Y') ?>'} // Top x-axis.
             }
           },
           bar: { groupWidth: "90%" }
@@ -154,6 +156,8 @@ google.charts.load('current', {'packages':['bar']});
 
 </script>
 
+    
+
 
 <script type="text/javascript" src="loader.js"></script>
     <script type="text/javascript">
@@ -162,13 +166,15 @@ google.charts.load('current', {'packages':['bar']});
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Colocation',    <?php echo $COLOCATION ?>],
-          ['Hosting',    <?php echo $HOSTING ?>],
-          ['Engenharia',    <?php echo $ENGENHARIA ?>]
+          ['Readequação cabo KM',    <?php echo $red_cab ?>],
+          ['Lançamento cabo KM',    <?php echo $lancamentos_cab ?>],
+          ['Vistoria cabo KM',    <?php echo $vist_cabos ?>],
+          ['Poda roçada KM',    <?php echo $poda_rocada ?>],
+          ['Readequação rede KM',    <?php echo $read_rede ?>]
         ]);
 
         var options = {
-          title: 'Colocation / Massive / engenharia <?php echo date('Y') ?> ',
+          title: 'Atividades por KM ano <?php echo date('Y') ?> ',
           is3D: true,
         };
 
@@ -181,6 +187,19 @@ google.charts.load('current', {'packages':['bar']});
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+  
 
 
     <meta charset="utf-8">
@@ -311,7 +330,7 @@ google.charts.load('current', {'packages':['bar']});
                        
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i > <h4>Relatório Grafico de preventivas</h4></i>
+                                <i > <h4>Relatório Gráfico de preventivas PR</h4></i>
                             </li>
                         </ol>
 

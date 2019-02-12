@@ -1,6 +1,14 @@
 <?php
 include "conn.php"; 
+session_start();
 
+if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'TEC' ) )
+{
+  header("Location: index.html");
+  exit;
+  
+  
+}
 
 
 $ba = $_GET['ba'];
@@ -24,6 +32,7 @@ if (mysql_num_rows($sql) > 0)
         $data = $dado["data"];
         $id = $dado["id"];
         $cabo = $dado["cabo"];
+        $equipe = $dado["equipe"];
 
    
          
@@ -208,8 +217,8 @@ height:70px;
 
 
 
-      <label for="email">ID:</label>  
-      <input type="text" class="form-control" id="id" name="id" placeholder="máximo 5 colaboradores" readonly value="<?php echo $id; ?>">
+      <label for="email">EQUIPE:</label>  
+      <input type="text" class="form-control" id="id" name="id"  readonly value="<?php echo $equipe; ?>">
     </div>
        <div class="form-group">
     <label for="cabo">CABO:</label>
@@ -230,19 +239,13 @@ height:70px;
 
 
    
- <input type="file" id="ftaarquivo2"  name="ftaarquivo2" />
-    <input type="file"  id="ftaarquivo3"  name="ftaarquivo3" />
-    <input type="file"  id="ftaarquivo4"  name="ftaarquivo4" />
-    <input type="file"  style="float:left" id="ftaarquivo5"  name="ftaarquivo5" /><br><br>
+
      </div>
 
      <div class="form-group" id="realcar2">
      <label for="email"  >Foto Depois </label>
     <input type="file"  id="ftdarquivo1"  name="ftdarquivo1" />  
-    <input type="file"  id="ftdarquivo2"  name="ftdarquivo2" />
-    <input type="file"   id="ftdarquivo3"  name="ftdarquivo3" />
-    <input type="file"   id="ftdarquivo4"  name="ftdarquivo4" />
-    <input type="file"  id="ftdarquivo5" name="ftdarquivo5"   />
+   
      </div>
 
     

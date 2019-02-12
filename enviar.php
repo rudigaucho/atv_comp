@@ -10,6 +10,16 @@ function saidasuccessfully()
 <?php
 include "conn.php";
 
+session_start();
+
+if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'TEC' ) )
+{
+  header("Location: index.html");
+  exit;
+  
+  
+}
+
 
 /*
 //session_start();
@@ -299,7 +309,7 @@ move_uploaded_file ($_FILES['ftdarquivo5'] ['tmp_name'], $diretorio.$novo_nome10
 <script type="text/javascript">
 function saidasuccessfully()
 {
-	setTimeout("window.location='index.html'",3000);
+	setTimeout("window.location='cad_ba.php'",3000);
 	
 	
 }
@@ -372,7 +382,7 @@ echo 'erro, B.A invalido, o B.A deve conter 9 digitos!';
 }
 
 
-
+/*
 else if  ($vist_cb != is_numeric($vist_cb) or $post_subs != is_numeric($post_subs)  or $post_aprum != is_numeric($post_aprum) or $read_rede != is_numeric($read_rede)  or $redis_cabo != is_numeric($redis_cabo) or $lanc_cb != is_numeric($lanc_cb) or $poda != is_numeric($poda) or $post_imp != is_numeric($post_imp)  ){
    echo "Verifique os campos que recebem apenas números!!";
 }
@@ -390,7 +400,7 @@ echo 'erro, coordenadas invalidas  exemplo correto: -25.476079!';
 
 }
 
-
+*/
 $sql = mysql_query ("select * from atv_comp_principal where ba = '$ba' " );
 $row = mysql_num_rows($sql);
  if  ($row == 1)
@@ -411,9 +421,9 @@ else
 
 
 
-$query = "insert into atv_comp_principal (ba,vist_cabos,poste_subs,postes_apru,read_rede,read_cabos,lancamentos_cab,poda_rocada,postes_implant,vistorias_esta,coordenadas1,coordenadas2,id,cabo,entre_loc,data,obs)";
+$query = "insert into atv_comp_principal (ba,vist_cabos,poste_subs,postes_apru,read_rede,read_cabos,lancamentos_cab,poda_rocada,postes_implant,vistorias_esta,coordenadas1,coordenadas2,equipe,cabo,entre_loc,data,obs,editada,uf,id_gestor)";
 
-$query.= "values ('$ba','$vist_cb','$post_subs','$post_aprum','$read_rede','$redis_cabo','$lanc_cb','$poda','$post_impl','$vist_hr','$coord1','$coord2','$id','$cabo','$localidade',NOW(),'$obs')";
+$query.= "values ('$ba','$vist_cb','$post_subs','$post_aprum','$read_rede','$redis_cabo','$lanc_cb','$poda','$post_impl','$vist_hr','$coord1','$coord2','".$_SESSION['equipe']."','$cabo','$localidade',NOW(),'$obs','N','".$_SESSION['uf']."','".$_SESSION['id_gestor']."')";
 
 
 

@@ -299,7 +299,7 @@ move_uploaded_file ($_FILES['ftdarquivo5'] ['tmp_name'], $diretorio.$novo_nome10
 <script type="text/javascript">
 function saidasuccessfully()
 {
-	setTimeout("window.location='index.html'",3000);
+	setTimeout("window.location='cad_ba.php'",3000);
 	
 	
 }
@@ -378,7 +378,7 @@ else
 
 
 
-$query = "update atv_comp_principal set foto_antes1 = '$novo_nome',foto_antes2 = '$novo_nome2',foto_antes3 = '$novo_nome3',foto_antes4 = '$novo_nome4',foto_antes5 = '$novo_nome5',foto_dep1 = '$novo_nome6',foto_dep2 = '$novo_nome7',foto_dep3 = '$novo_nome8',foto_dep4 = '$novo_nome9',foto_dep5 = '$novo_nome10' where ba = '$ba'";
+$query = "update atv_comp_principal set foto_antes1 = '$novo_nome',foto_antes2 = '$novo_nome2',foto_antes3 = '$novo_nome3',foto_antes4 = '$novo_nome4',foto_antes5 = '$novo_nome5',foto_dep1 = '$novo_nome6',foto_dep2 = '$novo_nome7',foto_dep3 = '$novo_nome8',foto_dep4 = '$novo_nome9',foto_dep5 = '$novo_nome10', editada = 'S' where ba = '$ba'";
 
 
 

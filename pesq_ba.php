@@ -1,7 +1,7 @@
 ﻿<?php include "conn.php"; ?>
 <?php 
 
-
+session_start();
 
 
 ?>
@@ -76,7 +76,14 @@ function fnExcelReport() {
       
       
       <li class="active" style="float:right"> <a href="#" id="test" onClick="javascript:fnExcelReport();">Gerar excel</a></li>
+      <?php if ($_SESSION["acesso"] == 'ADM'){ ?>
       <li class="active" style="float:right"><a href="dashboard.php">Voltar</a></li>
+      <?php } else { ?>
+
+     
+      <li class="active" style="float:right"><a href="cad_ba.php">Voltar</a></li>
+      <?php } ?>
+      
       
       
       <li><a href="#"></a></li> 
@@ -104,7 +111,8 @@ function fnExcelReport() {
     <thead>
       <tr >
         <th>B.A</th>
-        <th>ID</th>
+        <th>EQUIPE</th>
+        <th>UF</th>
         <th>Data</th>
          <th>ENTRE LOCALIDADES</th>
        
@@ -114,6 +122,7 @@ function fnExcelReport() {
          <th>COORDENADAS</th>
         <th>RELATÓRIO</th>
         <th>ANEXAR FOTOS</th>
+        <th>Gerar Pdf</th>
       
        
       </tr>
@@ -123,9 +132,22 @@ function fnExcelReport() {
 if (isset($_POST ['submit']) )
 {
 $busca = $_POST['ba'];
-$sql = mysql_query ("select * from atv_comp_principal where ba = '".$busca."'" );
 
-$sql2 = mysql_query ("select * from fotos where ba = '".$busca."'" );
+if ($_SESSION["acesso"] == 'TEC'){
+$sql = mysql_query ("select * from atv_comp_principal where ba = '".$busca."' and equipe = '".$_SESSION['equipe']."'" );
+
+$sql2 = mysql_query ("select * from fotos where ba = '".$busca."'and equipe = '".$_SESSION['equipe']."'" );
+
+}
+
+else{
+
+  $sql = mysql_query ("select * from atv_comp_principal where ba = '".$busca."'" );
+
+  $sql2 = mysql_query ("select * from fotos where ba = '".$busca."'" );
+
+
+}
 
 $row = mysql_num_rows($sql);
 $row2 = mysql_num_rows($sql2);
@@ -139,7 +161,8 @@ if (mysql_num_rows($sql) > 0)
     <tbody>
       <tr class="success">
       <td> <?php echo $dado ["ba"];  ?></td>
-<td> <?php echo $dado ["id"];  ?></td>
+<td> <?php echo $dado ["equipe"];  ?></td>
+<td> <?php echo $dado ["uf"];  ?></td>
 <td> <?php echo $dado ["data"];  ?></td>
  <td> <?php echo $dado ["entre_loc"];  ?></td>
 
@@ -168,7 +191,10 @@ if (mysql_num_rows($sql) > 0)
 
 
 <td> <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal<?php echo $dado ['ba'];  ?>" >Visualizar</button> </td>
+<?php if ($_SESSION["acesso"] == 'TEC' and $dado ["editada"] == 'N'){ ?>
 <td> <a href="enviar_foto.php?ba=<?php echo $dado ["ba"]; ?>" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Anexar</a> </td>
+<?php } else { ?> <td> </td>  <?php } ?>
+<td> <a href="gerar_pdf.php?ba=<?php echo $dado ["ba"]; ?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a>
 
 
 <div class="modal fade" id="myModal<?php echo $dado ['ba'];  ?>" role="dialog">
@@ -184,7 +210,7 @@ if (mysql_num_rows($sql) > 0)
 
           <h4 class="modal-title" style="text-align:center">RELATÓRIO<h4>
           <p>BA: <strong><?php echo $dado ["ba"];  ?></strong></p>
-        <p>ID: <strong><?php echo $dado ["id"];  ?></strong></p>
+        <p>EQUIPE: <strong><?php echo $dado ["equipe"];  ?></strong></p>
         <p>Data: <strong><?php echo $dado ["data"];  ?></strong></p>
         <p>ENTRE LOCALIDADES: <strong><?php echo $dado ["entre_loc"];  ?></strong></p>
         <p>VISTORIASN DE CABOS: <strong><?php echo $dado ["vist_cabos"];  ?></strong></p>
@@ -242,7 +268,7 @@ if (mysql_num_rows($sql) > 0)
 
         <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-<a href="mapa2.php?lat=<?php echo $coordenadas1 ?>&long=<?php echo $coordenadas2 ?>" id="test" target="_blank" onClick="javascript:fnExcelReport();">GPS </a>
+<!-- <a href="mapa2.php?lat=<?php // echo $coordenadas1 ?>&long=<?php // echo $coordenadas2 ?>" id="test" target="_blank" onClick="javascript:fnExcelReport();">GPS </a> -->
 
           
          

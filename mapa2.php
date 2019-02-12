@@ -29,24 +29,26 @@ $long = $_GET["long"];
   <body>
     <div id="map"></div>
     <script>
+      function initMap() {
+        var myLatLng = {lat: -25.363, lng: 131.044};
 
-function initMap() {
-  var myLatLng = {lat: <?php echo $lat ?>, lng: <?php echo $long ?> };
+        // Create a map object and specify the DOM element
+        // for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          zoom: 4
+        });
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 15,
-    center: myLatLng
-  });
-
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    
-  });
-}
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatLng,
+          title: 'Hello World!'
+        });
+      }
 
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzmfOpeXuKZBMMot0NYcX0gDdFs2bbmk&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLv_M8m7g8CwqnU7-NYGUlPNvj5zDXMk&callback=initMap"
+        async defer></script>
   </body>
 </html>

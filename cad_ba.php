@@ -1,4 +1,17 @@
 ﻿
+<?php
+      
+session_start();
+
+if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  )
+{
+  header("Location: index.html");
+  exit;
+  
+  
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -145,7 +158,9 @@ height:70px;
       <a class="navbar-brand" href="#">Serede</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active" style="float:right"><a href="#">Editar</a></li>
+      <li class="active" style="float:right"><a href="pesq_ba.php">Busca BA</a></li>
+      <li class="active" style="float:right"><a href="pesq_per.php">Busca Período</a></li>
+      <li class="active" style="float:right"><a href="logout.php">Logout</a></li>
       
       
       <li><a href="#"></a></li> 
@@ -171,14 +186,7 @@ height:70px;
        <label for="email">BA:</label>
       <input type="text" class="form-control" id="ba" name="ba" maxlength="9"  placeholder="9 digitos" required>
     </div>
-     <div class="form-group">
-
-
-
-
-      <label for="email">ID:</label>  <label style="font-size:12px; color:red;">  (se não houver 5 id's complete o restante com zeros '0')</label>
-      <input type="text" class="form-control" id="id" name="id" placeholder="máximo 5 colaboradores" required>
-    </div>
+     
        <div class="form-group">
     <label for="cabo">CABO:</label>
       <input type="text" class="form-control" id="cabo" name="cabo" onblur="completar_campos();"  required>
@@ -188,14 +196,35 @@ height:70px;
     <br>
    
     </div>
+
+    <fieldset style="border: 1px solid; padding: 12px;">
    
     <div class="form-group">
-      <label for="pwd">REDISPOSIÇÃO DE CABOS (KM)</label>
-      <input type="text" class="form-control" id="redis_cabo" name="redis_cabo" required placeholder="Apenas números" >
-    </div><br>
+      <label for="pwd">REDISPOSIÇÃO DE CABOS (KM)</label><br>
+      <select class="custom-select my-1 mr-sm-2" name="redis_cabo">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
+    </div><br>  
+
      <div class="form-group">
-     <label for="pwd">LANÇAMENTO DE CABOS (KM):</label>
-      <input type="text" class="form-control" id="lanc_cb" name="lanc_cb" required placeholder="Apenas números" >
+     <label for="pwd">LANÇAMENTO DE CABOS (KM):</label><br>
+     <select class="custom-select my-1 mr-sm-2" name="lanc_cb">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
     </div>
     
     
@@ -203,34 +232,92 @@ height:70px;
 
    
  
-    <div class="form-group">
+    <br><div class="form-group">
  <label for="pwd">VISTORIAS CABOS (KM):</label>
-      <input type="text" class="form-control" id="vist_cb" name="vist_cb" required placeholder="Apenas números" >
+ <br><select class="custom-select my-1 mr-sm-2" name="vist_cb">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
     </div><br>
-   <div class="form-group">
-      &nbsp<label for="pwd">POSTES SUBSTITUÍDOS:</label>
-      <input type="text" class="form-control" id="post_subs" name="post_subs" required placeholder="Apenas números" >
-    </div>
-    <div class="form-group">
-    <label for="pwd">POSTES APRUMADOS</label>
-      <input type="text" class="form-control" id="post_aprum" name="post_aprum" required placeholder="Apenas números" >
-    </div><br>
+   
     <div class="form-group">
       <label for="pwd">READEQUAÇÃO DE REDE (KM):</label>
-      <input type="text" class="form-control" id="read_rede" name="read_rede" required placeholder="Apenas números" >
+      <br><select class="custom-select my-1 mr-sm-2" name="read_rede">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
     </div>
     
    
-    <div class="form-group">
+    <br><div class="form-group">
     <label for="pwd">PODA ROÇADAS (KM):</label>
-      <input type="text" class="form-control" id="poda" name="poda" required placeholder="Apenas números" >
+    <br><select class="custom-select my-1 mr-sm-2" name="poda">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
+    </div><br>
+    </fieldset><br>
+
+    <fieldset style="border: 1px solid; padding: 12px;">
+    <div class="form-group">
+      &nbsp<label for="pwd">POSTES SUBSTITUÍDOS:</label>
+      <br><select class="custom-select my-1 mr-sm-2" name="post_subs">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
+    </div>
+    <div class="form-group">
+    <label for="pwd">POSTES APRUMADOS</label>
+    <br><select class="custom-select my-1 mr-sm-2" name="post_aprum">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
     </div><br>
 <div class="form-group">
       <label for="pwd">POSTES IMPLANTADOS:</label>
-      <input type="text" class="form-control" id="post_impl"  name="post_impl" required placeholder="Apenas números" >
+      <br><select class="custom-select my-1 mr-sm-2" name="post_impl">
+<?php
+    for ($i=0; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+</select>
     </div> <div class="form-group">
 
-
+    </fieldset><br>
    
     <div class="form-group">
       <label for="pwd">VISTÓRIAS ESTÁTICAS HORAS:</label>
