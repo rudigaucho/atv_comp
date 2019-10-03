@@ -192,89 +192,43 @@ height:70px;
       <input type="text" class="form-control" id="cabo" name="cabo" onblur="completar_campos();"  required>
        <img src="loading.gif" id="loading" style="display:none " />
       </div>
-    <div id="principal" >
+
+      <div id="principal" >
     <br>
    
     </div>
 
-    <fieldset style="border: 1px solid; padding: 12px;">
-   
-    <div class="form-group">
-      <label for="pwd">REDISPOSIÇÃO DE CABOS (KM)</label><br>
-      <select class="custom-select my-1 mr-sm-2" name="redis_cabo">
-<?php
-    for ($i=0; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
-    }
-?>
-</select>
-    </div><br>  
+      <div class="form-group">
+    <label for="cabo">REDISPOSIÇÃO DE CABOS (KM):</label>
+      <input type="text" class="form-control" id="redis_cabo" name="redis_cabo"   required>
+       
+      </div>
+      <div class="form-group">
+    <label for="cabo">LANÇAMENTO DE CABOS (KM):</label>
+      <input type="text" class="form-control" id="lanc_cb" name="lanc_cb"   required>
+       
+      </div>
 
-     <div class="form-group">
-     <label for="pwd">LANÇAMENTO DE CABOS (KM):</label><br>
-     <select class="custom-select my-1 mr-sm-2" name="lanc_cb">
-<?php
-    for ($i=0; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
-    }
-?>
-</select>
-    </div>
-    
-    
-     
+      <div class="form-group">
+    <label for="cabo">VISTORIAS CABOS (KM):</label>
+      <input type="text" class="form-control" id="vist_cb" name="vist_cb"   required>
+       
+      </div>
 
-   
+      <div class="form-group">
+    <label for="cabo">READEQUAÇÃO DE REDE (KM):</label>
+      <input type="text" class="form-control" id="read_rede" name="read_rede"   required>
+       
+      </div>
+
+      <div class="form-group">
+    <label for="cabo">PODA ROÇADAS (KM):</label>
+      <input type="text" class="form-control" id="poda" name="poda"   required>
+       
+      </div>
+    
+
  
-    <br><div class="form-group">
- <label for="pwd">VISTORIAS CABOS (KM):</label>
- <br><select class="custom-select my-1 mr-sm-2" name="vist_cb">
-<?php
-    for ($i=0; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
-    }
-?>
-</select>
-    </div><br>
-   
-    <div class="form-group">
-      <label for="pwd">READEQUAÇÃO DE REDE (KM):</label>
-      <br><select class="custom-select my-1 mr-sm-2" name="read_rede">
-<?php
-    for ($i=0; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
-    }
-?>
-</select>
-    </div>
-    
-   
-    <br><div class="form-group">
-    <label for="pwd">PODA ROÇADAS (KM):</label>
-    <br><select class="custom-select my-1 mr-sm-2" name="poda">
-<?php
-    for ($i=0; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
-    }
-?>
-</select>
-    </div><br>
-    </fieldset><br>
 
     <fieldset style="border: 1px solid; padding: 12px;">
     <div class="form-group">
